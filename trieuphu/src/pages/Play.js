@@ -48,20 +48,22 @@ export const Play = ({
   );
 
   useEffect(() => {
-    if (status !== 'answering') return undefined;
+    if (loading || error || !question || status !== 'answering') {
+      return undefined;
+    }
 
     const intervalId = setInterval(() => {
       setSeconds((currentSeconds) => Math.max(currentSeconds - 1, 0));
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [status]);
+  }, [error, loading, question, status]);
 
   useEffect(() => {
-    if (status === 'answering' && seconds === 0) {
+    if (!loading && !error && question && status === 'answering' && seconds === 0) {
       finishGame('timeout', questionIndex);
     }
-  }, [finishGame, questionIndex, seconds, status]);
+  }, [error, finishGame, loading, question, questionIndex, seconds, status]);
 
   useEffect(() => {
     if (status === 'locked') {
@@ -115,7 +117,9 @@ export const Play = ({
   );
 
   useEffect(() => {
-    if (status !== 'answering') return undefined;
+    if (loading || error || !question || status !== 'answering') {
+      return undefined;
+    }
 
     const handleKey = (event) => {
       const answerIndex = LETTERS.indexOf(event.key.toUpperCase());
@@ -127,7 +131,7 @@ export const Play = ({
 
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [handleAnswer, hiddenAnswers, status]);
+  }, [error, handleAnswer, hiddenAnswers, loading, question, status]);
 
   const useFiftyFifty = () => {
     if (status !== 'answering' || usedLifelines.fifty || !question) return;

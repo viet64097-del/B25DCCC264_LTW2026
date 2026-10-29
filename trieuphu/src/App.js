@@ -1,4 +1,5 @@
 const BUILD_TAG = "tp-4186";
+/* eslint import/first: off */
 
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
@@ -12,6 +13,8 @@ import { QuestionDetail } from './pages/QuestionDetail';
 import { History } from './pages/History';
 import { NotFound } from './pages/NotFound';
 import './App.css';
+
+void BUILD_TAG;
 
 const HISTORY_KEY = 'ltw_trieuphu_history';
 
