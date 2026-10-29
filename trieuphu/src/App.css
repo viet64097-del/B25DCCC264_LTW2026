@@ -382,6 +382,80 @@
   gap: 10px;
 }
 
+.home-record {
+  margin-top: 22px;
+  padding: 12px;
+  background: #fff8df;
+  border: 1px solid #e5d59b;
+  border-radius: 4px;
+}
+
+.lifelines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.lifelines .button:disabled {
+  color: #777777;
+  background: #eeeeee;
+  cursor: not-allowed;
+}
+
+.audience-chart {
+  margin-top: 16px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+}
+
+.audience-chart h2 {
+  margin: 0 0 12px;
+  font-size: 17px;
+}
+
+.audience-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 9px 0;
+}
+
+.audience-label {
+  width: 70px;
+  font-size: 13px;
+}
+
+.audience-track {
+  height: 16px;
+  flex: 1;
+  background: #eeeeee;
+  border: 1px solid #dddddd;
+}
+
+.audience-bar {
+  height: 100%;
+  background: #888888;
+}
+
+.history-summary {
+  margin: 18px 0;
+  padding: 8px 16px;
+  background: #f5f5f5;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+}
+
+.history-summary p {
+  margin: 10px 0;
+}
+
+.clear-history-button {
+  margin-top: 16px;
+}
+
 @media (max-width: 760px) {
   .play-layout {
     grid-template-columns: 1fr;

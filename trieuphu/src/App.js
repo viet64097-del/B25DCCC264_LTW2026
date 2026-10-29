@@ -1,6 +1,6 @@
 const BUILD_TAG = "tp-4186";
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { Layout } from './components/Layout';
@@ -9,15 +9,43 @@ import { Play } from './pages/Play';
 import { Result } from './pages/Result';
 import { QuestionBank } from './pages/QuestionBank';
 import { QuestionDetail } from './pages/QuestionDetail';
+import { History } from './pages/History';
 import { NotFound } from './pages/NotFound';
 import './App.css';
 
+const HISTORY_KEY = 'ltw_trieuphu_history';
+
 const App = () => {
   const [playerName, setPlayerName] = useState('');
+  const [history, setHistory] = useState(() => {
+    try {
+      const savedHistory = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      return Array.isArray(savedHistory) ? savedHistory : [];
+    } catch {
+      return [];
+    }
+  });
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+
+  const saveFinishedGame = useCallback((result) => {
+    const record = {
+      id: Date.now(),
+      ...result,
+      playedAt: new Date().toLocaleString('vi-VN'),
+    };
+    setHistory((currentHistory) => [record, ...currentHistory]);
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    } catch {
+      // Keep the game usable if browser storage is unavailable.
+    }
+  }, [history]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -54,6 +82,7 @@ const App = () => {
               playerName={playerName}
               setPlayerName={setPlayerName}
               onStart={() => navigate('/play')}
+              history={history}
             />
           }
         />
@@ -66,6 +95,7 @@ const App = () => {
                 loading={loading}
                 error={error}
                 playerName={playerName}
+                onGameFinished={saveFinishedGame}
               />
             ) : (
               <Navigate to="/" replace />
@@ -73,7 +103,10 @@ const App = () => {
           }
         />
         <Route path="result" element={<Result />} />
-        <Route path="history" element={<h2>Lịch sử</h2>} />
+        <Route
+          path="history"
+          element={<History history={history} setHistory={setHistory} />}
+        />
         <Route
           path="questions"
           element={

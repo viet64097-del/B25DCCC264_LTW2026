@@ -5,6 +5,7 @@ export const QuestionCard = ({
   questionNumber,
   status,
   selectedAnswer,
+  hiddenAnswers,
   onChoose,
 }) => (
   <section className="question-card">
@@ -19,6 +20,7 @@ export const QuestionCard = ({
           status={status}
           selectedAnswer={selectedAnswer}
           correctAnswer={question.answer}
+          hidden={hiddenAnswers.includes(index)}
           onChoose={onChoose}
         />
       ))}

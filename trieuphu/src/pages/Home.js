@@ -1,5 +1,10 @@
-export const Home = ({ playerName, setPlayerName, onStart }) => (
-  <section className="home-page">
+import { formatMoney } from '../data';
+
+export const Home = ({ playerName, setPlayerName, onStart, history }) => {
+  const bestResult = [...history].sort((first, second) => second.prize - first.prize)[0];
+
+  return (
+    <section className="home-page">
     <p className="section-label">Trò chơi kiến thức · 15 câu hỏi</p>
     <h1>Ai là triệu phú</h1>
     <p className="intro-text">
@@ -36,5 +41,12 @@ export const Home = ({ playerName, setPlayerName, onStart }) => (
         Bắt đầu
       </button>
     </form>
+
+    {bestResult && (
+      <p className="home-record">
+        Kỷ lục: <strong>{formatMoney(bestResult.prize)} – {bestResult.name}</strong>
+      </p>
+    )}
   </section>
-);
+  );
+};

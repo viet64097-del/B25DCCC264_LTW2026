@@ -6,6 +6,7 @@ export const AnswerButton = ({
   status,
   selectedAnswer,
   correctAnswer,
+  hidden,
   onChoose,
 }) => {
   let answerClass = '';
@@ -28,10 +29,10 @@ export const AnswerButton = ({
     <button
       className={`game-answer ${answerClass}`}
       type="button"
-      disabled={status !== 'answering'}
+      disabled={status !== 'answering' || hidden}
       onClick={() => onChoose(index)}
     >
-      {LETTERS[index]}. {option}
+      {hidden ? '' : `${LETTERS[index]}. ${option}`}
     </button>
   );
 };

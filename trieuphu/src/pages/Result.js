@@ -5,6 +5,7 @@ const RESULT_TITLES = {
   won: 'Chúc mừng! Bạn đã trở thành triệu phú',
   wrong: 'Rất tiếc, bạn đã trả lời sai',
   timeout: 'Hết giờ!',
+  stop: 'Bạn đã dừng cuộc chơi',
 };
 
 export const Result = () => {
