@@ -20,3 +20,34 @@
   --shadow-card: none;
   --tracking-display: -0.015em; --display-weight: 800;
 }
+
+.app.light {
+  color-scheme: light;
+  --color-paper: #ffffff;
+  --color-ink: #18212c;
+  --color-paper-2: #f2f4f6;
+  --color-paper-3: #e7ebef;
+  --color-ink-2: #35404c;
+  --color-muted: #596674;
+  --color-rule: #c9d0d7;
+  --color-rule-2: #35404c;
+  --color-draw-row: rgba(255, 193, 7, 0.25);
+  --color-last-place: #c62828;
+}
+
+.app.dark {
+  color-scheme: dark;
+  --color-paper: #1f2430;
+  --color-ink: #e8eaf0;
+  --color-paper-2: #272d39;
+  --color-paper-3: #303746;
+  --color-ink-2: #c8ced9;
+  --color-muted: #a5afbd;
+  --color-rule: #454d5a;
+  --color-rule-2: #7c8796;
+  --color-draw-row: rgba(255, 193, 7, 0.13);
+  --color-last-place: #ff8a82;
+  --color-error: #ff958c;
+  --color-accent-deep: oklch(88% 0.2 120);
+  --color-focus: oklch(88% 0.2 120);
+}
